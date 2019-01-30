@@ -276,7 +276,7 @@ paths:
                 type: object
                 properties:
                   Id:
-                    type: string
+                    type: integer
                   Name:
                     type: string
                   Class:
@@ -318,7 +318,7 @@ paths:
         x-examples:
           application/json:
             Course: 16076744
-  '/students/:id/courses':
+  '/students/:Id/courses':
     get:
       responses:
         '200':
@@ -341,7 +341,7 @@ paths:
           description: Unique Student Id
           schema:
             type: integer
-  '/students/:id/grades':
+  '/students/:Id/grades':
     get:
       responses:
         '200':
@@ -498,7 +498,7 @@ paths:
             Description: dolor elit labore nisi
             enrolledStudents:
               - 65487720
-  '/courses/:id':
+  '/courses/:Id':
     get:
       responses:
         '200':
@@ -621,7 +621,7 @@ paths:
           description: Unique Course Id
           schema:
             type: integer
-  '/courses/:id/addStudents':
+  '/courses/:Id/addStudents':
     post:
       responses:
         '200':
@@ -674,7 +674,7 @@ paths:
         x-examples:
           application/json:
             Student: 66851039
-  '/courses/:id/students':
+  '/courses/:Id/students':
     get:
       responses:
         '200':
@@ -697,7 +697,7 @@ paths:
           description: Unique course Id
           schema:
             type: integer
-  '/courses/:id/grades':
+  '/courses/:Id/grades':
     get:
       responses:
         '200':
@@ -809,7 +809,7 @@ paths:
             Student: 619512
             Course: 67
             Grade: 67270084
-  '/grades/:id':
+  '/grades/:Id':
     get:
       responses:
         '200':

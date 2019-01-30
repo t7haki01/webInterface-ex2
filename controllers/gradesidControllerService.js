@@ -5,10 +5,10 @@ var grades = data.grades;
 module.exports.getGradesById = function getGradesById(req, res, next) {
     console.log(req.params)
 
-    var result = "There is no such a grade which " + req.params.id + " is id"
+    var result = "There is no such a grade which " + req.params.Id + " is id"
     
     for(var i = 0; i < grades.length; i++){
-        if(parseInt(req.params.id) === grades[i].Id){
+        if(parseInt(req.params.Id) === grades[i].Id){
             result = grades[i];
         }
     }
@@ -21,11 +21,11 @@ module.exports.putGradeById = function putGradeById(req, res, next) {
     var isAllowed = true;
     //First checking which grades for editing with id
     for(var i = 0; i<grades.length; i++){
-        if(grades[i].Id === parseInt(req.params.id)){
+        if(grades[i].Id === parseInt(req.params.Id)){
             isThere = true;
             //Then checking for when editing the id, it supposed not to same with others
             for(var j = 0; j<grades.length; j++){
-                if(parseInt(req.body.Id) !== parseInt(req.params.id) && grades[j].Id === parseInt(req.body.Id)){
+                if(parseInt(req.body.Id) !== parseInt(req.params.Id) && grades[j].Id === parseInt(req.body.Id)){
                     res.send("Id already exist, same Id not allowed!");
                     isAllowed = false;
                     break;
@@ -53,7 +53,7 @@ module.exports.deleteGradeById = function deleteGradeById(req, res, next) {
   var isThere = false;
     //Finding grades with id
     for(var i = 0; i<grades.length; i++){
-        if(grades[i].Id === parseInt(req.params.id)){
+        if(grades[i].Id === parseInt(req.params.Id)){
             grades.splice(i,1);
             isThere = true;
         }

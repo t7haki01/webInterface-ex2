@@ -5,7 +5,7 @@ var students = data.students;
 module.exports.getGradesByStudentId = function getGradesByStudentId(req, res, next) {
   var gathered = [], result =[];
     for(var i = 0; i<data.grades.length; i++){
-        if(data.grades[i].Student === parseInt(req.params.id)){
+        if(data.grades[i].Student === parseInt(req.params.Id)){
             gathered.push(data.grades[i]);
         }
     }

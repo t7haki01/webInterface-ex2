@@ -29,6 +29,8 @@ module.exports.postCoursesByStudentId = function postCoursesByStudentId(req, res
         }
     }
     if(isThere && !isEnrolled){
+        // res.statusCode = 201
+        console.log(res);
         console.log("Successfully Enrolled");
         res.send(result);
     }else{

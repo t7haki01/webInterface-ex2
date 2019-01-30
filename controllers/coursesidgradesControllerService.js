@@ -6,7 +6,7 @@ module.exports.getGradesByCourseId = function getGradesByCourseId(req, res, next
     console.log(req.params)
     var gathered = [], result =[];
     for(var i = 0; i<data.grades.length; i++){
-        if(data.grades[i].Course === parseInt(req.params.id)){
+        if(data.grades[i].Course === parseInt(req.params.Id)){
             gathered.push(data.grades[i]);
         }
     }

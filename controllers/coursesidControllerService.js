@@ -3,10 +3,10 @@ var data = require('./data');
 var courses = data.courses;
 
 module.exports.getCourseById = function getCourseById(req, res, next) {
-  console.log(req.params)
-  var result = "There is no such a course which Id is " + req.params.id
+
+  var result = "There is no such a course which Id is " + req.params.Id
     for(var i = 0; i < courses.length; i++){
-        if(parseInt(req.params.id) === courses[i].Id){
+        if(parseInt(req.params.Id) === courses[i].Id){
             result = courses[i];
         }
     }
@@ -19,11 +19,11 @@ module.exports.putCourseById = function putCourseById(req, res, next) {
     var isAllowed = true;
     //First checking which courses for editing with id
     for(var i = 0; i<courses.length; i++){
-        if(courses[i].Id === parseInt(req.params.id)){
+        if(courses[i].Id === parseInt(req.params.Id)){
             isThere = true;
             //Then checking for when editing the id, it supposed not to same with others
             for(var j = 0; j<courses.length; j++){
-                if(parseInt(req.body.Id) !== parseInt(req.params.id) && courses[j].Id === parseInt(req.body.Id)){
+                if(parseInt(req.body.Id) !== parseInt(req.params.Id) && courses[j].Id === parseInt(req.body.Id)){
                     res.send("Id already exist, same Id not allowed!");
                     isAllowed = false;
                     break;
@@ -51,7 +51,7 @@ module.exports.deleteCourseById = function deleteCourseById(req, res, next) {
   var isThere = false;
     //Finding courses with id
     for(var i = 0; i<courses.length; i++){
-        if(courses[i].Id === parseInt(req.params.id)){
+        if(courses[i].Id === parseInt(req.params.Id)){
             courses.splice(i,1);
             isThere = true;
         }

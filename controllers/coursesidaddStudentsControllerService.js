@@ -8,7 +8,7 @@ module.exports.postStudentsToCourse = function postStudentsToCourse(req, res, ne
     var isEnrolled = false;
     //First finding which course is with id
     for(var i = 0; i<courses.length; i++){
-        if(courses[i].Id === parseInt(req.params.id)){
+        if(courses[i].Id === parseInt(req.params.Id)){
             isThere = true;
             //Checking is enrolled already or not
             for(var j = 0; j<courses[i].enrolledStudents.length; j++){
@@ -22,7 +22,7 @@ module.exports.postStudentsToCourse = function postStudentsToCourse(req, res, ne
                 courses[i].enrolledStudents.push(parseInt(req.body.Student));
                 for(var k = 0; k<data.students.length;k++){
                     if(parseInt(req.body.Student)===data.students[k].Id){
-                        data.students[k].enrolledCourses.push(parseInt(req.params.id));
+                        data.students[k].enrolledCourses.push(parseInt(req.params.Id));
                     }
                 }
                 var result = courses[i];

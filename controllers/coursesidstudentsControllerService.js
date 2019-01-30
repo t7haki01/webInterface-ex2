@@ -8,11 +8,11 @@ module.exports.getStudentsByCourseId = function getStudentsByCourseId(req, res, 
     var result = "There seems like nobody has been enrolled or course is not exist";
     //First checking course with id
     for(var i = 0; i<courses.length; i++){
-        if(courses[i].Id === parseInt(req.params.id)){
+        if(courses[i].Id === parseInt(req.params.Id)){
             isThere = true;
             var enrolledStudents = [];
             for(var j = 0; j<data.students.length; j++){
-                if(data.students[j].enrolledCourses.indexOf(parseInt(req.params.id)) !== -1){
+                if(data.students[j].enrolledCourses.indexOf(parseInt(req.params.Id)) !== -1){
                     enrolledStudents.push(data.students[j].Name);
                 }
             }

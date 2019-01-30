@@ -3,6 +3,7 @@ var data = require('./data');
 var students = data.students;
 
 module.exports.getStudentById = function getStudentById(req, res, next) {
+    console.log(req.params)
   var result = "There is no such a student whoes Id is " + req.params.Id
     for(var i = 0; i < students.length; i++){
         if(parseInt(req.params.Id) === students[i].Id){

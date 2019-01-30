@@ -20,6 +20,8 @@ module.exports.postStudent = function postStudent(req, res, next) {
     if(isThere === false){
         students.push(req.body);
         console.log("Successfully students added!");
+        res.statusCode = 201        
+        console.log(res)
         res.send(students);
     }
 };
