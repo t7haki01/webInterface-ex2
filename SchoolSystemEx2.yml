@@ -1,0 +1,928 @@
+openapi: 3.0.0
+info:
+  title: School Data Api API
+  version: "1.0"
+  description: This API serves students info, courses info and grades info.
+  license:
+    name: ""
+  contact:
+    name: kihun han
+    url: kihun.net
+    email: kihun@kihun.net
+paths:
+  /students:
+    get:
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    Name:
+                      type: string
+                    Address:
+                      type: string
+                    Class:
+                      type: string
+                    enrolledCourses:
+                      type: array
+                      items:
+                        type: integer
+                    Id:
+                      type: integer
+              examples:
+                response:
+                  value:
+                    - Name: student1
+                      Address: address1
+                      Class: class1
+                      enrolledCourses:
+                        - 1
+                        - 2
+                        - 3
+                      Id: 1
+                    - Name: student2
+                      Address: address2
+                      Class: class2
+                      enrolledCourses:
+                        - 1
+                        - 2
+                        - 3
+                      Id: 2
+      description: This path will return all students info
+      summary: Get Students All
+      operationId: getStudents
+    post:
+      responses:
+        "201":
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    Name:
+                      type: string
+                    Address:
+                      type: string
+                    Class:
+                      type: string
+                    enrolledCourses:
+                      type: array
+                      items:
+                        type: integer
+                    Id:
+                      type: integer
+              examples:
+                response:
+                  value:
+                    - Name: student 1
+                      Address: address 1
+                      Class: class 1
+                      enrolledCourses:
+                        - 1
+                        - 2
+                        - 3
+                      Id: 1
+                    - Name: student new
+                      Address: address new
+                      Class: class new
+                      enrolledCourses:
+                        []
+                      Id: 101
+      summary: Post Student
+      description: This path will create new student information
+      operationId: postStudent
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                Name:
+                  type: string
+                Address:
+                  type: string
+                Class:
+                  type: string
+                enrolledCourses:
+                  type: array
+                  items:
+                    type: integer
+                Id:
+                  type: integer
+        x-examples:
+          application/json:
+            Name: student new
+            Address: address new
+            Class: class new
+            enrolledCourses:
+              []
+            Id: 101
+  /students/:Id:
+    get:
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Name:
+                    type: string
+                  Address:
+                    type: string
+                  Class:
+                    type: string
+                  enrolledCourses:
+                    items:
+                      type: integer
+                    oneOf:
+                      - type: string
+                      - type: array
+                        items:
+                          {}
+                  Id:
+                    type: integer
+              examples:
+                response:
+                  value:
+                    Name: Micheal Owen
+                    Address: Kotkantie 1
+                    Class: LIV02
+                    enrolledCourses:
+                      - 1
+                      - 2
+                      - 3
+                    Id: 1
+      summary: Get Student by Id
+      description: "This path will return specific student information with specific id "
+      operationId: getStudentById
+      parameters:
+        - in: path
+          name: Id
+          description: Unique Student ID
+          required: true
+          schema:
+            type: integer
+    put:
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Id:
+                    type: integer
+                  Name:
+                    type: string
+                  Class:
+                    type: string
+                  enrolledCourses:
+                    type: array
+                    items:
+                      type: integer
+                  Address:
+                    type: string
+              examples:
+                response:
+                  value:
+                    Id: 54350884
+                    Name: re
+                    Class: ex
+                    enrolledCourses:
+                      - 79137048
+                      - 71583257
+                      - 2956846
+                      - 21378562
+                      - 38107198
+                    Address: incididunt commodo aliqua fugiat cupid
+      summary: Put Student by Id
+      description: "This path will update specific student information with specific id "
+      operationId: putStudentById
+      parameters:
+        - in: path
+          name: Id
+          required: true
+          description: Unique Student Id
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                Id:
+                  type: integer
+                Name:
+                  type: string
+                Class:
+                  type: string
+                enrolledCourses:
+                  type: array
+                  items:
+                    type: integer
+                Address:
+                  type: string
+        x-examples:
+          application/json:
+            Id: 54350884
+            Name: re
+            Class: ex
+            enrolledCourses:
+              - 79137048
+              - 71583257
+              - 2956846
+              - 21378562
+              - 38107198
+            Address: incididunt commodo aliqua fugiat cupid
+    delete:
+      responses:
+        "200":
+          description: ""
+          content:
+            text/html:
+              schema:
+                type: string
+            text/plain:
+              examples:
+                response:
+                  value: Successfully deleted
+      summary: Delete Student by Id
+      description: This path will delete specific student data with specific Id
+      operationId: deleteStudentById
+      parameters:
+        - in: path
+          name: Id
+          required: true
+          description: Unique Student Id
+          schema:
+            type: integer
+  /students/:Id/addCourses:
+    post:
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Id:
+                    type: string
+                  Name:
+                    type: string
+                  Class:
+                    type: string
+                  enrolledCourses:
+                    type: array
+                    items:
+                      type: integer
+                  Address:
+                    type: string
+              examples:
+                response:
+                  value:
+                    Id: et tempor quis Ut consectetur
+                    Name: dolore ma
+                    Class: esse in reprehenderit p
+                    enrolledCourses:
+                      - 82622458
+                      - 93544276
+                    Address: velit in consequat
+      description: This path will enroll the courses to the student data
+      summary: Post Courses by Student Id
+      operationId: postCoursesByStudentId
+      parameters:
+        - in: path
+          name: Id
+          required: true
+          description: Unique Student Id
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                Course:
+                  type: integer
+        x-examples:
+          application/json:
+            Course: 16076744
+  /students/:id/courses:
+    get:
+      responses:
+        "200":
+          description: ""
+          content:
+            text/html:
+              schema:
+                type: object
+                properties:
+                  {}
+              examples:
+                response:
+                  value: Enrolled courses are course1, course2, course3
+      summary: Get enrolled Courses
+      description: This path will return specific students enrolled courses
+      operationId: getEnrolledCourses
+      parameters:
+        - in: path
+          name: Id
+          required: true
+          description: Unique Student Id
+          schema:
+            type: integer
+  /students/:id/grades:
+    get:
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+              examples:
+                response:
+                  value:
+                    - "course1: 1"
+                    - "course2: 2"
+                    - "course3: 3"
+                    - "course4: 4"
+      summary: Get grades
+      description: This path will return grades of specific students with Id
+      operationId: getGradesByStudentId
+      parameters:
+        - in: path
+          name: Id
+          required: true
+          description: Unique Student Id
+          schema:
+            type: integer
+  /courses:
+    get:
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    Name:
+                      type: string
+                    Description:
+                      type: string
+                    enrolledStudents:
+                      type: array
+                      items:
+                        type: integer
+                    Id:
+                      type: integer
+              examples:
+                response:
+                  value:
+                    - Name: esse amet quis
+                      Description: elit proident deserunt
+                      enrolledStudents:
+                        - 724228
+                        - 36149117
+                      Id: 94450366
+                    - Name: dolor qui nulla mollit veniam
+                      Description: proident dolore
+                      enrolledStudents:
+                        - 25664418
+                        - -60949010
+                        - -5324273
+                        - 8974401
+                      Id: 95251519
+                    - Name: aliquip dolore
+                      Description: ipsum ea officia aute
+                      enrolledStudents:
+                        - -35131579
+                      Id: 85218073
+      summary: Get Courses All
+      operationId: getCourseAll
+      description: This path will return all course data
+    post:
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    Id:
+                      type: integer
+                    Name:
+                      type: string
+                    Description:
+                      type: string
+                    enrolledStudents:
+                      type: array
+                      items:
+                        type: integer
+              examples:
+                response:
+                  value:
+                    - Id: 88203637
+                      Name: eu ipsum exercitation
+                      Description: adipisicing laboris anim dolore culpa
+                      enrolledStudents:
+                        - -43005966
+                    - Id: -83433778
+                      Name: reprehend
+                      Description: ipsum
+                      enrolledStudents:
+                        - -77730809
+                        - 6674445
+                        - 25370807
+                    - Id: 10141796
+                      Name: veniam in elit ipsum
+                      Description: dolore cupidatat laborum incididunt
+                      enrolledStudents:
+                        - -17052205
+                        - 11178977
+                    - Id: 80441227
+                      Name: volup
+                      Description: proident
+                      enrolledStudents:
+                        - -10147601
+                    - Id: -31984081
+                      Name: aliquip qui
+                      Description: consequat eu occaecat est voluptate
+                      enrolledStudents:
+                        - -15432506
+                        - -85375546
+                        - 47269791
+                        - -17209061
+                        - -8552895
+      summary: Post Course
+      description: This path will post requested course data
+      operationId: postCourse
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                Id:
+                  type: integer
+                Name:
+                  type: string
+                Description:
+                  type: string
+                enrolledStudents:
+                  type: array
+                  items:
+                    type: integer
+        x-examples:
+          application/json:
+            Id: 7490667
+            Name: labo
+            Description: dolor elit labore nisi
+            enrolledStudents:
+              - 65487720
+  /courses/:id:
+    get:
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Id:
+                    type: integer
+                  Name:
+                    type: string
+                  Description:
+                    type: string
+                  enrolledStudents:
+                    type: array
+                    items:
+                      type: integer
+              examples:
+                response:
+                  value:
+                    Id: 103359
+                    Name: adipisicing et
+                    Description: cupidatat anim fugiat voluptate
+                    enrolledStudents:
+                      - 38216
+                      - 83472
+      summary: Get Course By Id
+      description: This path will return specific course data with specific id
+      operationId: getCourseById
+      parameters:
+        - in: path
+          name: Id
+          required: true
+          description: Unique Course Id
+          schema:
+            type: integer
+    put:
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Id:
+                    type: integer
+                  Name:
+                    type: string
+                  Description:
+                    type: string
+                  enrolledStudents:
+                    type: array
+                    items:
+                      type: integer
+              examples:
+                response:
+                  value:
+                    Id: 52221627
+                    Name: sit
+                    Description: laborum cillum eu
+                    enrolledStudents:
+                      - 3573793
+                      - 8427
+                      - 79892712
+                      - 82495333
+      summary: Put Course By Id
+      description: This path will update specific course
+      operationId: putCourseById
+      parameters:
+        - in: path
+          name: Id
+          required: true
+          description: Unique course Id
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                Id:
+                  type: integer
+                Name:
+                  type: string
+                Description:
+                  type: string
+                enrolledStudents:
+                  type: array
+                  items:
+                    type: integer
+        x-examples:
+          application/json:
+            Id: 97882466
+            Name: amet sunt eu dolore
+            Description: voluptate dolore deserunt consequat nostrud
+            enrolledStudents:
+              - 203933
+    delete:
+      responses:
+        "200":
+          description: ""
+          content:
+            text/html:
+              schema:
+                type: string
+              examples:
+                response:
+                  value: Successfully deleted
+      summary: Delete Course By Id
+      description: This path will delete the course data with specific id
+      operationId: deleteCourseById
+      parameters:
+        - in: path
+          name: Id
+          required: true
+          description: Unique Course Id
+          schema:
+            type: integer
+  /courses/:id/addStudents:
+    post:
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Id:
+                    type: integer
+                  Name:
+                    type: string
+                  Description:
+                    type: string
+                  enrolledStudents:
+                    type: array
+                    items:
+                      type: integer
+              examples:
+                response:
+                  value:
+                    Id: 1665905
+                    Name: anim
+                    Description: adipisi
+                    enrolledStudents:
+                      - 89937
+                      - 61
+                      - 63252371
+                      - 391601
+                      - 248436
+      summary: Enroll Students to Course
+      description: This path will enroll the students to course data
+      operationId: postStudentsToCourse
+      parameters:
+        - in: path
+          name: Id
+          required: true
+          description: Unique Course Id
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                Student:
+                  type: integer
+        x-examples:
+          application/json:
+            Student: 66851039
+  /courses/:id/students:
+    get:
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: string
+            text/html:
+              examples:
+                response:
+                  value: Enrolled students are student1, student2, student3
+      summary: Get Students By Course Id
+      description: This path will return enrolled students list of course
+      operationId: getStudentsByCourseId
+      parameters:
+        - in: path
+          name: Id
+          required: true
+          description: Unique course Id
+          schema:
+            type: integer
+  /courses/:id/grades:
+    get:
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+              examples:
+                response:
+                  value:
+                    - "student1: 3"
+                    - "student2: 4"
+                    - "student3: 4"
+                    - "student4: 5"
+      summary: Get Grades By Id
+      description: This path will return grades data of course
+      operationId: getGradesByCourseId
+      parameters:
+        - in: path
+          name: Id
+          required: true
+          description: Unique Course Id
+          schema:
+            type: integer
+  /grades:
+    get:
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    Course:
+                      type: integer
+                    Student:
+                      type: integer
+                    Grade:
+                      type: integer
+                    Id:
+                      type: integer
+      summary: Get Grades All
+      description: This path will return all grades data
+      operationId: getGradesAll
+    post:
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    Id:
+                      type: integer
+                    Student:
+                      type: integer
+                    Grade:
+                      type: integer
+                    Course:
+                      type: integer
+              examples:
+                response:
+                  value:
+                    - Id: -18566648
+                      Student: 86717483
+                      Grade: 74476747
+                      Course: 13271419
+                    - Id: -5539400
+                      Student: 73201644
+                      Grade: -98945400
+                      Course: -62322731
+                    - Id: -48681958
+                      Student: -8104454
+                      Grade: -92555833
+                      Course: -63780540
+                    - Id: 19593901
+                      Student: -6676457
+                      Grade: 61674783
+                      Course: -207905
+      summary: Post Grades
+      description: This path will create new grade data
+      operationId: postGrades
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                Id:
+                  type: integer
+                Student:
+                  type: integer
+                Course:
+                  type: integer
+                Grade:
+                  type: integer
+        x-examples:
+          application/json:
+            Id: 70059811
+            Student: 619512
+            Course: 67
+            Grade: 67270084
+  /grades/:id:
+    get:
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Id:
+                    type: integer
+                  Student:
+                    type: integer
+                  Course:
+                    type: integer
+                  Grade:
+                    type: integer
+              examples:
+                response:
+                  value:
+                    Id: -59090642
+                    Student: -55241577
+                    Course: 20607187
+                    Grade: -16604176
+      summary: Get Grade By Id
+      description: This path will return specific grade data with specific id
+      operationId: getGradesById
+      parameters:
+        - in: path
+          name: Id
+          required: true
+          description: Unique grade Id
+          schema:
+            type: integer
+    put:
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  Id:
+                    type: integer
+                  Student:
+                    type: integer
+                  Grade:
+                    type: integer
+                  Course:
+                    type: integer
+              examples:
+                response:
+                  value:
+                    Id: -35288262
+                    Student: -46482013
+                    Grade: -73643820
+                    Course: 2157465
+      summary: Put Grade By Id
+      description: This path will update specified grade data
+      operationId: putGradeById
+      parameters:
+        - in: path
+          name: Id
+          required: true
+          description: Unique grade ID
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                Id:
+                  type: integer
+                Course:
+                  type: integer
+                Student:
+                  type: integer
+                Grade:
+                  type: integer
+        x-examples:
+          application/json:
+            Id: -31627617
+            Course: -95618793
+            Student: -77027899
+            Grade: 8265773
+    delete:
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: string
+            text/html:
+              examples:
+                response:
+                  value: Successfully deleted
+      summary: Delete Grade By Id
+      description: This path will delete specified grade
+      operationId: deleteGradeById
+      parameters:
+        - in: path
+          name: Id
+          required: true
+          description: Unique Grade ID
+          schema:
+            type: integer
+servers:
+  - url: http://localhost:3000/
